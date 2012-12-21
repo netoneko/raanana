@@ -10,4 +10,4 @@ class Map
     }).addTo(@map);
 
   popup: (lat, long, text) ->
-    L.marker([lat, long]).addTo(@map).bindPopup(text).openPopup();
+    L.marker([lat, long]).addTo(@map).bindPopup(text)
