@@ -7,11 +7,13 @@ if Meteor.isClient
         console.log("You pressed the button")
 
   Meteor.startup ->
-    map = new Map(32.184802, 34.871672, 13)
-    datasource = new TwitterDatasource(map)
-    datasource.getData()
+    map = new Map(32.184802, 34.871672, 14)
 
-    Template.index.radius = -> datasource.radius
+    twitter = new TwitterDatasource(map)
+    twitter.getData()
+
+    foursquare = new FoursquareDatasource(map, 16)
+    foursquare.getData()
 
 if Meteor.isServer
   Meteor.startup ->

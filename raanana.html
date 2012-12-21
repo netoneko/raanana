@@ -1,39 +1,77 @@
 <head>
-  <title>raanana</title>
-  <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.4/leaflet.css" />
-  <script src="http://cdn.leafletjs.com/leaflet-0.4/leaflet.js"></script>
+    <title>raanana</title>
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.4/leaflet.css"/>
+    <script src="http://cdn.leafletjs.com/leaflet-0.4/leaflet.js"></script>
 </head>
 
 <body>
-  {{> index}}
+{{> index}}
 </body>
 
 <template name="hello">
-  <h1>Hello World!</h1>
-  {{greeting}}
-  <input type="button" value="Click" />
+    <h1>Hello World!</h1>
+    {{greeting}}
+    <input type="button" value="Click"/>
 </template>
 
 <template name="index">
-  <div class="container">
-      <h1>Raanana venues and stuff</h1>
+    <div class="container">
+        <h1>What's up in Raanana?</h1>
 
-      <div class="row">
-          <div class="span6">
-             {{> map}}
-          </div>
-          <div class="span6">
-              <div class="well">
-                  <h2>Tweets in Raanana area</h2>
-                  <div class="tweets"></div>
-              </div>
-          </div>
-      </div>
-  </div>
+        <div class="row">
+            <div class="span6">
+                {{> map}}
+
+                {{> photos}}
+
+                {{> foursquare}}
+            </div>
+            <div class="span6">
+                <div class="well">
+                    <div id="tweets"></div>
+                </div>
+            </div>
+        </div>
+    </div>
 </template>
 
 <template name="map">
     <div id="map">
 
+    </div>
+</template>
+
+<template name="photos">
+    <div id="photos">
+
+    </div>
+</template>
+
+<template name="foursquare">
+    <div id="foursquare">
+        <div class="row" id="venues">
+
+        </div>
+    </div>
+</template>
+
+<template name="venue">
+    <div class='venue span3'>
+        <div class='media'>
+            <div class='pull-left'><img src="{{icon}}"></div>
+            <div class='media-body'>{{venue.name}}</div>
+        </div>
+    </div>
+</template>
+
+<template name="tweet">
+    <div class="tweet">
+        <blockquote><img src='{{tweet.profile_image_url}}' class='pull-left'/>
+            <p>{{{text}}}</p>
+            <small>{{tweet.from_user_name}}
+                (<a href='https://twitter.com/{{tweet.from_user}}' target=_blank>@{{tweet.from_user}}</a>) at
+                <a href='https://twitter.com/{{tweet.from_user}}/status/{{tweet.id_str}}' target=_blank>{{tweet.created_at}}</a>
+            </small>
+        </blockquote>
     </div>
 </template>
