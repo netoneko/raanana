@@ -35,13 +35,13 @@ class FoursquareDatasource
       console.log data
 
       venues = $('#venues')
-      _.each data.response.groups[0].items, (item) =>
+      _.each data.response.groups[0].items, (item, index) =>
         console.log item
 
         venue = item.venue
-        tips = item.tips
 
-        venues.append $(Template.venue {venue: venue, icon: venue.categories[0].icon})
+        tip = item.tips[0].text if item.tips? && item.tips.length > 0
+        venues.append $(Template.venue {venue: venue, icon: venue.categories[0].icon, tip: tip, should_break: (index % 2)})
 
         @map.popup venue.location.lat, venue.location.lng, "<a href=#{venue.canonicalUrl} target=_blank><img src=#{venue.categories[0].icon}> #{venue.name}</a>"
 
