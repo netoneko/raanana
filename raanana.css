@@ -1,1 +1,5 @@
 /* CSS declarations go here */
+#map {
+   height: 500px;
+   width: 100%;
+}

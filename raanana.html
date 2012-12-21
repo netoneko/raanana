@@ -1,13 +1,38 @@
 <head>
   <title>raanana</title>
+  <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.4/leaflet.css" />
+  <script src="http://cdn.leafletjs.com/leaflet-0.4/leaflet.js"></script>
 </head>
 
 <body>
-  {{> hello}}
+  {{> index}}
 </body>
 
 <template name="hello">
   <h1>Hello World!</h1>
   {{greeting}}
   <input type="button" value="Click" />
+</template>
+
+<template name="index">
+  <div class="container">
+      <h1>Raanana venues and stuff</h1>
+
+      <div class="row">
+          <div class="span6">
+             {{> map}}
+          </div>
+          <div class="span6">
+              <div class="well">
+                  This is caption, telling you nothing new or entertaining.
+              </div>
+          </div>
+      </div>
+  </div>
+</template>
+
+<template name="map">
+    <div id="map">
+
+    </div>
 </template>
