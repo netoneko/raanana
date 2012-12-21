@@ -14,10 +14,10 @@ class TwitterDatasource
 
         if (entities = tweet.entities)?
           _.each entities.urls, (url) ->
-            text = text.replace url.url, "<a href='#{url.expanded_url}'>#{url.display_url}</a>"
+            text = text.replace url.url, "<a href='#{url.expanded_url}' target=_blank>#{url.display_url}</a>"
 
           _.each entities.media, (media) ->
-            text = text.replace media.url, "<a href='#{media.expanded_url}'>#{media.display_url}</a>"
+            text = text.replace media.url, "<a href='#{media.expanded_url}' target=_blank>#{media.display_url}</a>"
             # text += "<img src='#{media.media_url}'/><br/>"
 
 
