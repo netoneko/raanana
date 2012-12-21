@@ -15,6 +15,9 @@ if Meteor.isClient
     foursquare = new FoursquareDatasource(map, 16)
     foursquare.getData()
 
+    instagram = new InstagramDatasource(map)
+    instagram.getData()
+
 if Meteor.isServer
   Meteor.startup ->
     # code to run on server at startup

@@ -1,5 +1,5 @@
 <head>
-    <title>raanana</title>
+    <title>What's up in Raanana?</title>
     <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.4/leaflet.css"/>
     <script src="http://cdn.leafletjs.com/leaflet-0.4/leaflet.js"></script>
 </head>
@@ -17,20 +17,26 @@
 
 <template name="index">
     <div class="container">
-        <h1>What's up in Raanana? <small>Useless local web service</small></h1>
+        <h1>What's up in Raanana?
+            <small>Useless local web service</small>
+        </h1>
 
         <div class="row">
-            <div class="span6">
+            <div class="span9">
                 {{> map}}
 
-                {{> photos}}
-
-                {{> foursquare}}
-            </div>
-            <div class="span6">
-                <div class="well">
-                    <div id="tweets"></div>
+                <div class="row">
+                    <div class="span3">
+                        {{> foursquare}}
+                    </div>
+                    <div class="span6">
+                        {{> instagram}}
+                    </div>
                 </div>
+            </div>
+
+            <div class="span3">
+                {{> twitter}}
             </div>
         </div>
     </div>
@@ -42,14 +48,36 @@
     </div>
 </template>
 
-<template name="photos">
-    <div id="photos">
+<template name="instagram">
+    <div id="instagram">
+        <h3>Photos <small>via <a href="https://instagram.com">Instagram</a></small></h3>
+        <ul class="photos thumbnails">
 
+        </ul>
     </div>
+</template>
+
+<template name="photo">
+    <li class="photo">
+        <a href="{{{url}}}" target="_blank" class="thumbnail">
+            <img src="{{{src}}}">
+        </a>
+
+        {{#if comment}}
+        <div class="caption">
+            <p>{{{comment}}}</p>
+        </div>
+        {{/if}}
+    </li>
+
+    {{#if should_break}}
+    <br clear="all"/>
+    {{/if}}
 </template>
 
 <template name="foursquare">
     <div id="foursquare">
+        <h3>Trendy places <small>by <a href="https://foursquare.com">Foursquare</a></small></h3>
         <div class="row" id="venues">
 
         </div>
@@ -68,23 +96,30 @@
             </div>
         </div>
     </div>
+</template>
 
-    {{#if should_break}}
-    <br clear="all"/>
-    {{/if}}
+<template name="twitter">
+    <div id="twitter">
+        <h3>Buzz <small>from <a href="https://twitter.com">Twitter</a></small></h3>
+        <div id="tweets"></div>
+    </div>
 </template>
 
 <template name="tweet">
     <div class="tweet">
         <blockquote><img src='{{tweet.profile_image_url}}' class='pull-left'/>
+
             <p>{{{text}}}</p>
             <small>{{tweet.from_user_name}}
-                (<a href='https://twitter.com/{{tweet.from_user}}' target=_blank>@{{tweet.from_user}}</a>) at
-                <a href='https://twitter.com/{{tweet.from_user}}/status/{{tweet.id_str}}' target=_blank>{{tweet.created_at}}</a>
+                (<a href='https://twitter.com/{{tweet.from_user}}' target=_blank>@{{tweet.from_user}}</a>)
+                <a href='https://twitter.com/{{tweet.from_user}}/status/{{tweet.id_str}}' target=_blank>{{timestamp}} ago</a>
             </small>
         </blockquote>
     </div>
 </template>
 
 <template name="github">
-    <a href="https://github.com/netoneko/raanana"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_orange_ff7600.png" alt="Fork me on GitHub"></a></template>
+    <a href="https://github.com/netoneko/raanana"><img style="position: absolute; top: 0; right: 0; border: 0;"
+                                                       src="https://s3.amazonaws.com/github/ribbons/forkme_right_orange_ff7600.png"
+                                                       alt="Fork me on GitHub"></a>
+</template>
