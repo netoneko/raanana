@@ -3,3 +3,8 @@
    height: 500px;
    width: 100%;
 }
+
+blockquote img {
+    float: left;
+    padding-right: 3px;
+}
