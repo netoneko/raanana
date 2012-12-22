@@ -22,7 +22,9 @@ if Meteor.isClient
       new datasource(map).processData()
 
 
-  lookupLocationFromSearchbox = -> lookupLocation $('.search-query').attr('value'), updateDatasources
+  lookupLocationFromSearchbox = ->
+    document.location.hash = location = $('.search-query').attr('value')
+    lookupLocation location, updateDatasources
 
 
   Template.index.events {
@@ -32,6 +34,7 @@ if Meteor.isClient
     }
 
   Meteor.startup ->
+    $('.search-query').attr('value', document.location.hash.replace('#', '') || "Raanana")
     lookupLocationFromSearchbox()
 
 if Meteor.isServer
