@@ -1,0 +1,19 @@
+<template name="twitter">
+    <div id="twitter">
+        <h3>Buzz <small>from <a href="https://twitter.com">Twitter</a></small></h3>
+        <div id="tweets"></div>
+    </div>
+</template>
+
+<template name="tweet">
+    <div class="tweet">
+        <blockquote><img src='{{tweet.profile_image_url}}' class='pull-left'/>
+
+            <p>{{{text}}}</p>
+            <small>{{tweet.from_user_name}}
+                (<a href='https://twitter.com/{{tweet.from_user}}' target=_blank>@{{tweet.from_user}}</a>)
+                <a href='https://twitter.com/{{tweet.from_user}}/status/{{tweet.id_str}}' target=_blank>{{timestamp}} ago</a>
+            </small>
+        </blockquote>
+    </div>
+</template>

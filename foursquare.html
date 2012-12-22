@@ -1,0 +1,22 @@
+<template name="foursquare">
+    <div id="foursquare">
+        <h3>Trendy places <small>by <a href="https://foursquare.com">Foursquare</a></small></h3>
+        <div class="row" id="venues">
+
+        </div>
+    </div>
+</template>
+
+<template name="venue">
+    <div class='venue span3'>
+        <div class='media'>
+            <div class='pull-left'><img src="{{icon}}"></div>
+            <div class='media-body'>
+                <h4><a href="{{{venue.canonicalUrl}}}" target="_blank">{{venue.name}}</a></h4>
+                {{#if tip}}
+                <p>{{{tip}}}</p>
+                {{/if}}
+            </div>
+        </div>
+    </div>
+</template>
