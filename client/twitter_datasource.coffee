@@ -11,7 +11,7 @@ class TwitterDatasource extends Datasource
         timestamp = if (t = Math.round(time / 1000 / 60 / 60, 1)) > 0
           timestamp =  "#{t}h"
         else
-          timestamp = ">1h"
+          timestamp = "less than hour"
 
 
         if (entities = tweet.entities)?

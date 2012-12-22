@@ -17,7 +17,6 @@ if Meteor.isClient
 
 
   updateDatasources = (lat, long) ->
-    console.log "updateDatasources #{lat}, #{long}"
     map = new Map(lat, long, 14)
     _.each [TwitterDatasource, InstagramDatasource, FoursquareDatasource], (datasource) ->
       new datasource(map).processData()
