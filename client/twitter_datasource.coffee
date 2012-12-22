@@ -1,17 +1,13 @@
-class TwitterDatasource
+class TwitterDatasource extends Datasource
   constructor: (@map)->
-    @radius = "2km"
-    @url = "http://search.twitter.com/search.json?geocode=#{@map.lat},#{@map.long},#{@radius}
-         &result_type=mixed&include_entities=true&callback=?"
-
-  getData: ->
-    $.getJSON @url, {}, (data) =>
-      tweets = $('#tweets')
-      _.each data.results, (tweet) =>
+    super @map, '#tweets', {
+      url:
+        (map) -> "http://search.twitter.com/search.json?geocode=#{map.lat},#{map.long},2km&result_type=recent&include_entities=true&callback=?"
+      extractData: (data) -> data.results
+      processData: (tweet) ->
         text = tweet.text
 
         time = new Date() - new Date(Date.parse(tweet.created_at))
-
         timestamp = if (t = Math.round(time / 1000 / 60 / 60, 1)) > 0
           timestamp =  "#{t}h"
         else
@@ -24,6 +20,6 @@ class TwitterDatasource
 
           _.each entities.media, (media) ->
             text = text.replace media.url, "<a href='#{media.expanded_url}' target=_blank>#{media.display_url}</a>"
-        # text += "<img src='#{media.media_url}'/><br/>"
 
-        tweets.append Template.tweet {tweet: tweet, text: text, timestamp: timestamp}
+        Template.tweet {tweet: tweet, text: text, timestamp: timestamp}
+    }

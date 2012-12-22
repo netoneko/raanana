@@ -9,14 +9,9 @@ if Meteor.isClient
   Meteor.startup ->
     map = new Map(32.184802, 34.871672, 14)
 
-    twitter = new TwitterDatasource(map)
-    twitter.getData()
+    _.each [TwitterDatasource, InstagramDatasource, FoursquareDatasource], (datasource) ->
+      new datasource(map).processData()
 
-    foursquare = new FoursquareDatasource(map, 16)
-    foursquare.getData()
-
-    instagram = new InstagramDatasource(map)
-    instagram.getData()
 
 if Meteor.isServer
   Meteor.startup ->
