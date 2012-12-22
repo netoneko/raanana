@@ -25,9 +25,11 @@ if Meteor.isClient
   lookupLocationFromSearchbox = -> lookupLocation $('.search-query').attr('value'), updateDatasources
 
 
-  Template.index.events 'keypress': (event) ->
-    if event.charCode is 13
-      lookupLocationFromSearchbox()
+  Template.index.events {
+    'keypress .search-query': (event) ->
+      if event.keyCode is 13
+        lookupLocationFromSearchbox()
+    }
 
   Meteor.startup ->
     lookupLocationFromSearchbox()
