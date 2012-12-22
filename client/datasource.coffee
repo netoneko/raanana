@@ -3,7 +3,7 @@ class Datasource
     #
 
   render: (results) ->
-    node = $(@domElement)
+    node = $(@domElement).empty()
     _.each results, (result) =>
       node.append result
 

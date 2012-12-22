@@ -2,6 +2,8 @@ class Map
   API_KEY = "947e1d95ed0144569fb1066e9e900d8b"
 
   constructor: (@lat, @long, @zoom) ->
+    $('#map').replaceWith $("<div id='map'>")
+
     @map = L.map('map').setView([@lat, @long], @zoom)
 
     L.tileLayer("http://{s}.tile.cloudmade.com/#{API_KEY}/997/256/{z}/{x}/{y}.png", {
