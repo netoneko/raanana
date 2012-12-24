@@ -1,7 +1,7 @@
 class Map
   API_KEY = "947e1d95ed0144569fb1066e9e900d8b"
 
-  constructor: (@lat, @long, @zoom) ->
+  constructor: (@lat, @long, @zoom, refresh) ->
     $('#map').replaceWith $("<div id='map'>")
 
     @map = L.map('map').setView([@lat, @long], @zoom)
@@ -10,6 +10,10 @@ class Map
       attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>',
       maxZoom: 18
     }).addTo(@map);
+
+    @map.on 'moveend', (event) ->
+      center = this.getCenter()
+      refresh(center.lat, center.lng)
 
   popup: (lat, long, text) ->
     L.marker([lat, long]).addTo(@map).bindPopup(text)
