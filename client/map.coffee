@@ -22,7 +22,9 @@ class Map
 
     @map.on 'moveend', (event) ->
       center = this.getCenter()
+      $('.search-query').attr('value', document.location.hash = "#{center.lat},#{center.lng}")
       refresh(center.lat, center.lng)
+
 
   popup: (lat, long, text) ->
     L.marker([lat, long]).addTo(@map).bindPopup(text)

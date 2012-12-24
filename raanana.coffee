@@ -8,12 +8,13 @@ if Meteor.isClient
 
   lookupLocation = (location, renderCallback) ->
     if location is "Raanana"
-      renderCallback("32.184802", "34.871672")
+      renderCallback(32.184802, 34.871672)
+    else if ([lat, long] = _.map(location.split(','), (s) -> parseFloat(s))) and lat? and long?
+      renderCallback(lat, long)
     else
       url = "http://nominatim.openstreetmap.org/search.php?q=#{location}&format=json"
       $.getJSON url, {}, (data) =>
-        if (city = data[0])?
-          renderCallback(city.lat, city.lon)
+        renderCallback(city.lat, city.lon) if (city = data[0])?
 
 
   updateDatasources = (lat, long) ->
