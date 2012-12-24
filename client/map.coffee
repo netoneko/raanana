@@ -11,6 +11,15 @@ class Map
       maxZoom: 18
     }).addTo(@map);
 
+    center = @map.getCenter()
+    radar = L.circle [center.lat, center.lng], 2000, {
+      color: '#08c',
+      fillColor: '#08c',
+      fillOpacity: 0.3
+    }
+
+    radar.addTo @map
+
     @map.on 'moveend', (event) ->
       center = this.getCenter()
       refresh(center.lat, center.lng)
