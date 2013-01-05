@@ -36,5 +36,8 @@ class Map
     @radar.addTo @map
 
 
+  panTo: (lat, long) ->
+    @map.panTo [lat, long]
+
   popup: (lat, long, text) ->
     L.marker([lat, long]).addTo(@map).bindPopup(text)

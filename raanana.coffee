@@ -19,8 +19,11 @@ if Meteor.isClient
 
 
   updateDatasources = (lat, long) ->
-    unless @venueMap
+    if @venueMap
+      @venueMap.panTo(lat, long)
+    else
       @venueMap = new Map(lat, long, 14, updateDatasources)
+
 
     _.each [TwitterDatasource, InstagramDatasource, FoursquareDatasource], (datasource) ->
       new datasource(@venueMap, lat, long).processData()
