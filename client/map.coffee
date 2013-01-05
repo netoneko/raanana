@@ -2,7 +2,7 @@ class Map
   API_KEY = "947e1d95ed0144569fb1066e9e900d8b"
 
   constructor: (@lat, @long, @zoom, refresh) ->
-    $('#map').replaceWith $("<div id='map'>")
+#    $('#map').replaceWith $("<div id='map'>")
 
     @map = L.map('map').setView([@lat, @long], @zoom)
 
@@ -11,19 +11,29 @@ class Map
       maxZoom: 18
     }).addTo(@map);
 
+
+    @map.on 'moveend', (event) ->
+      center = @getCenter()
+
+      $('.search-query').attr('value', document.location.hash = "#{center.lat},#{center.lng}")
+      refresh(center.lat, center.lng)
+
+    @map.on 'moveend', =>
+      @updateCircle()
+
+    @updateCircle()
+
+
+  updateCircle: ->
     center = @map.getCenter()
-    radar = L.circle [center.lat, center.lng], 2000, {
+
+    @radar = L.circle [center.lat, center.lng], 2000, {
       color: '#08c',
       fillColor: '#08c',
       fillOpacity: 0.3
     }
 
-    radar.addTo @map
-
-    @map.on 'moveend', (event) ->
-      center = this.getCenter()
-      $('.search-query').attr('value', document.location.hash = "#{center.lat},#{center.lng}")
-      refresh(center.lat, center.lng)
+    @radar.addTo @map
 
 
   popup: (lat, long, text) ->

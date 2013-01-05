@@ -6,6 +6,7 @@ if Meteor.isClient
 #      if (typeof console not 'undefined')
 #        console.log("You pressed the button")
 
+
   lookupLocation = (location, renderCallback) ->
     if location is "Raanana"
       renderCallback(32.184802, 34.871672)
@@ -18,9 +19,11 @@ if Meteor.isClient
 
 
   updateDatasources = (lat, long) ->
-    map = new Map(lat, long, 14, updateDatasources)
+    unless @venueMap
+      @venueMap = new Map(lat, long, 14, updateDatasources)
+
     _.each [TwitterDatasource, InstagramDatasource, FoursquareDatasource], (datasource) ->
-      new datasource(map).processData()
+      new datasource(@venueMap, lat, long).processData()
 
 
   lookupLocationFromSearchbox = ->

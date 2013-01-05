@@ -3,9 +3,9 @@ class FoursquareDatasource extends Datasource
   CLIENT_SECRET = "BHMPRXUFOU2K2GI4BO5URAQW350L5LJ5P2A2Q3WQBMRNGOHL"
   LIMIT = 16
 
-  constructor: (@map) ->
+  constructor: (@map, @lat, @long) ->
     super @map, '#venues', {
-      url: -> "https://api.foursquare.com/v2/venues/explore?ll=#{map.lat},#{map.long}&radius=2000&limit=#{LIMIT}
+      url: => "https://api.foursquare.com/v2/venues/explore?ll=#{@lat},#{@long}&radius=2000&limit=#{LIMIT}
                 &client_id=#{CLIENT_ID}&client_secret=#{CLIENT_SECRET}&callback=?"
       extractData: (data) -> data.response.groups[0].items
       processData: (item) =>

@@ -1,8 +1,7 @@
 class TwitterDatasource extends Datasource
-  constructor: (@map)->
+  constructor: (@map, @lat, @long)->
     super @map, '#tweets', {
-      url:
-        (map) -> "http://search.twitter.com/search.json?geocode=#{map.lat},#{map.long},2km&result_type=recent&include_entities=true&callback=?"
+      url: => "http://search.twitter.com/search.json?geocode=#{@lat},#{@long},2km&result_type=recent&include_entities=true&callback=?"
       extractData: (data) -> data.results
       processData: (tweet) ->
         text = tweet.text
